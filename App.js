@@ -11,8 +11,14 @@ import React, {Component} from 'react';
 import {Image, ImageBackground, StyleSheet, Text, View} from 'react-native';
 import CompassHeading from 'react-native-compass-heading';
 import Geolocation from 'react-native-geolocation-service';
-
+import {Permission, PERMISSION_TYPE} from './src/AppPermission';
 class App extends Component {
+  componentDidMount() {
+    Permission.checkPermission(PERMISSION_TYPE.microphone);
+    Permission.checkPermission(PERMISSION_TYPE.location);
+    console.log('action');
+  }
+
   state = {
     compassHeading: 0,
     qiblad: 0,
@@ -77,6 +83,12 @@ class App extends Component {
               alignItems: 'center',
               justifyContent: 'center',
               transform: [{rotate: `${this.state.qiblad}deg`}],
+              // initialRegion: {
+              //   latitude: 0,
+              //   longitude: 0,
+              //   latitudeDelta: 80,
+              //   longitudeDelta: 80,
+              // },
             }}>
             <Image
               source={require('./assets/kakbah.png')}
